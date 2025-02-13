@@ -26,7 +26,7 @@ libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.2"
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", _*) => MergeStrategy.discard
-  case _                        => MergeStrategy.concat
+  case _                        => MergeStrategy.first
 }
 
 //assembly / assemblyOutputPath := baseDirectory.value / "target" / "my-app.jar"
