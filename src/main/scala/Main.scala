@@ -157,7 +157,7 @@ object Main {
         val responsesDF = responsesRDD.toDF("response")
         responsesDF.show()
         //responsesDF.write.format("json").mode("overwrite").save("/home/dmitry/temp/okn/output_for_matchbox")
-        responsesDF.write.format("json").mode("overwrite").save("/home/temp/okn/output_for_matchbox")
+        responsesDF.write.format("json").mode("overwrite").save("/home/javauser/output_for_matchbox")
 
         // Сохраняем датафрейм с результатами
         //        responsesDF.write.format("json").save(outputPath)
