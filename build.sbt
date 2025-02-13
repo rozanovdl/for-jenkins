@@ -4,7 +4,14 @@ ThisBuild / scalaVersion := "2.12.8"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "OKN_MATCHBOX"
+    name := "OKN_MATCHBOX",
+    assemblyMergeStrategy in assembly := {
+      case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+      case PathList("reference.conf") => MergeStrategy.concat
+      case PathList("META-INF", "services", _*) => MergeStrategy.concat
+      case PathList("META-INF", _*) => MergeStrategy.discard
+      case _ => MergeStrategy.first
+    }
   )
 //assemblyMergeStrategy in assembly := {
 //  case PathList("META-INF", _*) => MergeStrategy.discard
@@ -24,17 +31,19 @@ libraryDependencies += "com.softwaremill.sttp.client4" %% "core" % "4.0.0-M22"
 libraryDependencies += "org.postgresql" % "postgresql" % "42.7.2" //% "provided"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.2"
 
-assemblyMergeStrategy in assembly := {
-  case PathList("META-INF", _*) => MergeStrategy.discard
-  case _                        => MergeStrategy.first
-}
+
 
 //assembly / assemblyOutputPath := baseDirectory.value / "target" / "my-app.jar"
-
+//
 //assembly / assemblyMergeStrategy := {
 //  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
 //  case "application.conf"            => MergeStrategy.concat
 //  case x =>
 //    val oldStrategy = (assembly / assemblyMergeStrategy).value
 //    oldStrategy(x)
+//}
+
+//assemblyMergeStrategy in assembly := {
+//  case PathList("META-INF", _*) => MergeStrategy.discard
+//  case _                        => MergeStrategy.concat
 //}
