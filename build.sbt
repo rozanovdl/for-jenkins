@@ -24,14 +24,17 @@ libraryDependencies += "com.softwaremill.sttp.client4" %% "core" % "4.0.0-M22"
 libraryDependencies += "org.postgresql" % "postgresql" % "42.7.2" //% "provided"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.2"
 
-
-
-assembly / assemblyOutputPath := baseDirectory.value / "target" / "my-app.jar"
-
-assembly / assemblyMergeStrategy := {
-  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-  case "application.conf"            => MergeStrategy.concat
-  case x =>
-    val oldStrategy = (assembly / assemblyMergeStrategy).value
-    oldStrategy(x)
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", _*) => MergeStrategy.discard
+  case _                        => MergeStrategy.concat
 }
+
+//assembly / assemblyOutputPath := baseDirectory.value / "target" / "my-app.jar"
+
+//assembly / assemblyMergeStrategy := {
+//  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+//  case "application.conf"            => MergeStrategy.concat
+//  case x =>
+//    val oldStrategy = (assembly / assemblyMergeStrategy).value
+//    oldStrategy(x)
+//}
