@@ -5,7 +5,7 @@ ThisBuild / scalaVersion := "2.12.8"
 lazy val root = (project in file("."))
   .settings(
     name := "OKN_MATCHBOX",
-    assemblyMergeStrategy in assembly := {
+    assembly / assemblyMergeStrategy:=  {
       case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
       case PathList("reference.conf") => MergeStrategy.concat
       case PathList("META-INF", "services", _*) => MergeStrategy.concat
